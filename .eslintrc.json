@@ -12,8 +12,8 @@
     "import/extensions": ["error", "ignorePackages"],
     "linebreak-style": "off",
     "import/prefer-default-export": "off",
-    "no-console": "warn",
-    "camelcase": "warn",
+    "no-console": "off",
+    "camelcase": "off",
     "arrow-body-style": "warn",
     "arrow-parens": "warn",
     "comma-dangle": ["error", "always-multiline"]
