@@ -13,7 +13,7 @@ describe('Legal Person Cash Out Service', () => {
     const operation = {
       operation: { amount: 300, currency: 'EUR' },
     };
-    
+
     // 300 * 0.3% = 0.9
     expect(calculateLegalPersonCashOutCommission(operation, mockConfig)).toBe(0.9);
   });
@@ -22,7 +22,7 @@ describe('Legal Person Cash Out Service', () => {
     const operation = {
       operation: { amount: 100, currency: 'EUR' },
     };
-    
+
     // 100 * 0.3% = 0.3, but min is 0.5
     expect(calculateLegalPersonCashOutCommission(operation, mockConfig)).toBe(0.5);
   });
@@ -31,7 +31,7 @@ describe('Legal Person Cash Out Service', () => {
     const operation = {
       operation: { amount: 333.33, currency: 'EUR' },
     };
-    
+
     // 333.33 * 0.3% = 0.999999, should round up to 1.00
     expect(calculateLegalPersonCashOutCommission(operation, mockConfig)).toBe(1);
   });

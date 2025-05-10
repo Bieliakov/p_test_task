@@ -14,27 +14,27 @@ export const calculateCommissions = async (operations) => {
     const [cashInConfig, cashOutNaturalConfig, cashOutJuridicalConfig] = await Promise.all([
       fetchConfig('cash-in'),
       fetchConfig('cash-out-natural'),
-      fetchConfig('cash-out-juridical')
+      fetchConfig('cash-out-juridical'),
     ]);
 
     // Calculate commissions for all operations
-    return operations.map(operation => {
+    return operations.map((operation) => {
       const { type, user_type } = operation;
-      
+
       if (type === 'cash_in') {
         return calculateCashInCommission(operation, cashInConfig);
       }
-      
+
       if (type === 'cash_out') {
         if (user_type === 'natural') {
           return calculateNaturalPersonCashOutCommission(operation, cashOutNaturalConfig);
         }
-        
+
         if (user_type === 'juridical') {
           return calculateLegalPersonCashOutCommission(operation, cashOutJuridicalConfig);
         }
       }
-      
+
       throw new Error(`Unsupported operation: type=${type}, user_type=${user_type}`);
     });
   } catch (error) {

@@ -1,8 +1,8 @@
-import { 
-  roundUp, 
-  calculatePercentage, 
-  applyMaxLimit, 
-  applyMinLimit 
+import {
+  roundUp,
+  calculatePercentage,
+  applyMaxLimit,
+  applyMinLimit,
 } from './math-utils.js';
 
 describe('Math Utilities', () => {

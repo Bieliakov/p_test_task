@@ -15,9 +15,7 @@ export const roundUp = (value, decimals = 2) => {
  * @param {number} percentage - The percentage to apply
  * @returns {number} The calculated percentage
  */
-export const calculatePercentage = (amount, percentage) => {
-  return amount * (percentage / 100);
-};
+export const calculatePercentage = (amount, percentage) => amount * (percentage / 100);
 
 /**
  * Applies the maximum limit to a value
@@ -25,9 +23,7 @@ export const calculatePercentage = (amount, percentage) => {
  * @param {number} maxLimit - The maximum limit
  * @returns {number} The value capped at the maximum limit
  */
-export const applyMaxLimit = (value, maxLimit) => {
-  return value > maxLimit ? maxLimit : value;
-};
+export const applyMaxLimit = (value, maxLimit) => (value > maxLimit ? maxLimit : value);
 
 /**
  * Applies the minimum limit to a value
@@ -35,6 +31,4 @@ export const applyMaxLimit = (value, maxLimit) => {
  * @param {number} minLimit - The minimum limit
  * @returns {number} The value or the minimum limit, whichever is greater
  */
-export const applyMinLimit = (value, minLimit) => {
-  return value < minLimit ? minLimit : value;
-};
+export const applyMinLimit = (value, minLimit) => (value < minLimit ? minLimit : value);

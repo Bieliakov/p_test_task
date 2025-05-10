@@ -14,6 +14,10 @@ This application calculates commission fees for cash-in and cash-out operations 
 - Dynamic configuration fetching from API
 - Functional programming approach with ES6 modules
 
+## Requirements
+
+- Node.js version 18.0.0 or higher (required for built-in fetch API support)
+
 ## Installation
 
 1. Clone the repository

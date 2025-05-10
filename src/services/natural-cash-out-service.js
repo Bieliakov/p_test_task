@@ -14,21 +14,21 @@ export const calculateNaturalPersonCashOutCommission = (operation, config) => {
   const { date, user_id } = operation;
   const { amount } = operation.operation;
   const { percents, week_limit } = config;
-  
+
   const weekKey = getWeekKey(date, user_id);
   const weeklyTotal = weeklyWithdrawals.get(weekKey) || 0;
-  
+
   // Update weekly total
   weeklyWithdrawals.set(weekKey, weeklyTotal + amount);
-  
+
   // Calculate amount exceeding the free limit
   const freeLimit = week_limit.amount;
   const remainingFreeAmount = Math.max(0, freeLimit - weeklyTotal);
   const chargeableAmount = Math.max(0, amount - remainingFreeAmount);
-  
+
   // Calculate commission as percentage of the chargeable amount
   const commission = calculatePercentage(chargeableAmount, percents);
-  
+
   // Round up to the smallest currency unit (cents)
   return roundUp(commission);
 };

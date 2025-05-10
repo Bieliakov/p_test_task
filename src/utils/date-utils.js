@@ -6,12 +6,12 @@
 export const getWeekStartDate = (dateStr) => {
   const date = new Date(dateStr);
   const day = date.getDay() || 7; // Convert Sunday (0) to 7
-  
+
   // If it's Monday, return the date as is, otherwise go back to previous Monday
   if (day !== 1) {
     date.setDate(date.getDate() - (day - 1));
   }
-  
+
   return date.toISOString().split('T')[0];
 };
 

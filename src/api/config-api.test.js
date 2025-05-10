@@ -5,7 +5,7 @@ describe('Config API', () => {
     // This test makes no actual API calls but tests the fallback mechanism
     const endpoint = 'cash-in';
     const result = await fetchConfig(endpoint);
-    
+
     expect(result).toEqual({
       percents: 0.03,
       max: {
@@ -14,11 +14,11 @@ describe('Config API', () => {
       },
     });
   });
-  
+
   test('fetchConfig should return default cash-out-natural config when API is unavailable', async () => {
     const endpoint = 'cash-out-natural';
     const result = await fetchConfig(endpoint);
-    
+
     expect(result).toEqual({
       percents: 0.3,
       week_limit: {
@@ -27,11 +27,11 @@ describe('Config API', () => {
       },
     });
   });
-  
+
   test('fetchConfig should return default cash-out-juridical config when API is unavailable', async () => {
     const endpoint = 'cash-out-juridical';
     const result = await fetchConfig(endpoint);
-    
+
     expect(result).toEqual({
       percents: 0.3,
       min: {
