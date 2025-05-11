@@ -1,3 +1,5 @@
+import { API_ENDPOINTS, DEFAULT_COMMISSION_CONFIG, CURRENCY } from '../constants.js';
+
 /**
  * Returns default configuration in case API is unavailable
  * @param {string} endpoint - API endpoint path
@@ -5,28 +7,28 @@
  */
 const getDefaultConfig = (endpoint) => {
   switch (endpoint) {
-    case 'cash-in':
+    case API_ENDPOINTS.CASH_IN:
       return {
-        percents: 0.03,
+        percents: DEFAULT_COMMISSION_CONFIG.CASH_IN.PERCENT,
         max: {
-          amount: 5,
-          currency: 'EUR',
+          amount: DEFAULT_COMMISSION_CONFIG.CASH_IN.MAX_AMOUNT,
+          currency: CURRENCY.EUR,
         },
       };
-    case 'cash-out-natural':
+    case API_ENDPOINTS.CASH_OUT_NATURAL:
       return {
-        percents: 0.3,
+        percents: DEFAULT_COMMISSION_CONFIG.CASH_OUT_NATURAL.PERCENT,
         week_limit: {
-          amount: 1000,
-          currency: 'EUR',
+          amount: DEFAULT_COMMISSION_CONFIG.CASH_OUT_NATURAL.WEEKLY_FREE_LIMIT,
+          currency: CURRENCY.EUR,
         },
       };
-    case 'cash-out-juridical':
+    case API_ENDPOINTS.CASH_OUT_JURIDICAL:
       return {
-        percents: 0.3,
+        percents: DEFAULT_COMMISSION_CONFIG.CASH_OUT_JURIDICAL.PERCENT,
         min: {
-          amount: 0.5,
-          currency: 'EUR',
+          amount: DEFAULT_COMMISSION_CONFIG.CASH_OUT_JURIDICAL.MIN_AMOUNT,
+          currency: CURRENCY.EUR,
         },
       };
     default:
