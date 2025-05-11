@@ -1,11 +1,12 @@
 import { calculateNaturalPersonCashOutCommission, resetWeeklyWithdrawals } from './natural-cash-out-service.js';
+import { CURRENCY } from '../constants.js';
 
 describe('Natural Person Cash Out Service', () => {
   const mockConfig = {
     percents: 0.3,
     week_limit: {
       amount: 1000,
-      currency: 'EUR',
+      currency: CURRENCY.EUR,
     },
   };
 
@@ -17,7 +18,7 @@ describe('Natural Person Cash Out Service', () => {
     const operation = {
       date: '2023-05-01',
       user_id: 1,
-      operation: { amount: 1000, currency: 'EUR' },
+      operation: { amount: 1000, currency: CURRENCY.EUR },
     };
 
     expect(calculateNaturalPersonCashOutCommission(operation, mockConfig)).toBe(0);
@@ -27,7 +28,7 @@ describe('Natural Person Cash Out Service', () => {
     const operation = {
       date: '2023-05-01',
       user_id: 1,
-      operation: { amount: 1200, currency: 'EUR' },
+      operation: { amount: 1200, currency: CURRENCY.EUR },
     };
 
     // 200 EUR exceeds the limit, so 200 * 0.3% = 0.6
@@ -38,13 +39,13 @@ describe('Natural Person Cash Out Service', () => {
     const op1 = {
       date: '2023-05-01',
       user_id: 1,
-      operation: { amount: 800, currency: 'EUR' },
+      operation: { amount: 800, currency: CURRENCY.EUR },
     };
 
     const op2 = {
       date: '2023-05-03',
       user_id: 1,
-      operation: { amount: 300, currency: 'EUR' },
+      operation: { amount: 300, currency: CURRENCY.EUR },
     };
 
     // First withdrawal under limit
@@ -58,13 +59,13 @@ describe('Natural Person Cash Out Service', () => {
     const op1 = {
       date: '2023-05-01',
       user_id: 1,
-      operation: { amount: 1000, currency: 'EUR' },
+      operation: { amount: 1000, currency: CURRENCY.EUR },
     };
 
     const op2 = {
       date: '2023-05-08', // Next week (Monday)
       user_id: 1,
-      operation: { amount: 1000, currency: 'EUR' },
+      operation: { amount: 1000, currency: CURRENCY.EUR },
     };
 
     // First withdrawal under limit
@@ -78,13 +79,13 @@ describe('Natural Person Cash Out Service', () => {
     const op1 = {
       date: '2023-05-01',
       user_id: 1,
-      operation: { amount: 1000, currency: 'EUR' },
+      operation: { amount: 1000, currency: CURRENCY.EUR },
     };
 
     const op2 = {
       date: '2023-05-01',
       user_id: 2,
-      operation: { amount: 1000, currency: 'EUR' },
+      operation: { amount: 1000, currency: CURRENCY.EUR },
     };
 
     // First user's withdrawal under limit

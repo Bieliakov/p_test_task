@@ -1,17 +1,18 @@
 import { calculateCashInCommission } from './cash-in-service.js';
+import { CURRENCY } from '../constants.js';
 
 describe('Cash In Service', () => {
   const mockConfig = {
     percents: 0.03,
     max: {
       amount: 5,
-      currency: 'EUR',
+      currency: CURRENCY.EUR,
     },
   };
 
   test('should calculate commission correctly for small amounts', () => {
     const operation = {
-      operation: { amount: 200, currency: 'EUR' },
+      operation: { amount: 200, currency: CURRENCY.EUR },
     };
 
     // 200 * 0.03% = 0.06
@@ -20,7 +21,7 @@ describe('Cash In Service', () => {
 
   test('should apply maximum limit for large amounts', () => {
     const operation = {
-      operation: { amount: 20000, currency: 'EUR' },
+      operation: { amount: 20000, currency: CURRENCY.EUR },
     };
 
     // 20000 * 0.03% = 6, but max is 5
@@ -29,7 +30,7 @@ describe('Cash In Service', () => {
 
   test('should round up to cents', () => {
     const operation = {
-      operation: { amount: 50, currency: 'EUR' },
+      operation: { amount: 50, currency: CURRENCY.EUR },
     };
 
     // 50 * 0.03% = 0.015, should round up to 0.02

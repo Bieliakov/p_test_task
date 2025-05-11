@@ -110,7 +110,7 @@ describe('Config API', () => {
   test('fetchConfig should call API and cache the result', async () => {
     const mockConfig = {
       percents: 0.05,
-      max: { amount: 10, currency: 'EUR' },
+      max: { amount: 10, currency: CURRENCY.EUR },
     };
 
     // Mock fetch to simulate successful API call
@@ -128,7 +128,7 @@ describe('Config API', () => {
   test('fetchConfig should use cached result on subsequent calls', async () => {
     const mockConfig = {
       percents: 0.05,
-      max: { amount: 10, currency: 'EUR' },
+      max: { amount: 10, currency: CURRENCY.EUR },
     };
 
     // Mock fetch to simulate successful API call
@@ -154,7 +154,7 @@ describe('Config API', () => {
   test('fetchConfig should use expired cache when API fails', async () => {
     const mockConfig = {
       percents: 0.05,
-      max: { amount: 10, currency: 'EUR' },
+      max: { amount: 10, currency: CURRENCY.EUR },
     };
 
     // First API call succeeds
@@ -205,12 +205,12 @@ describe('Config API', () => {
   test('fetchConfig should refresh expired cache on successful API call', async () => {
     const initialConfig = {
       percents: 0.05,
-      max: { amount: 10, currency: 'EUR' },
+      max: { amount: 10, currency: CURRENCY.EUR },
     };
 
     const updatedConfig = {
       percents: 0.06,
-      max: { amount: 15, currency: 'EUR' },
+      max: { amount: 15, currency: CURRENCY.EUR },
     };
 
     // First API call succeeds with initialConfig
@@ -271,13 +271,13 @@ describe('Config API', () => {
     // Setup initial config
     const initialConfig = {
       percents: 0.03,
-      max: { amount: 5, currency: 'EUR' },
+      max: { amount: 5, currency: CURRENCY.EUR },
     };
 
     // Setup updated config
     const updatedConfig = {
       percents: 0.04,
-      max: { amount: 7, currency: 'EUR' },
+      max: { amount: 7, currency: CURRENCY.EUR },
     };
 
     // First call returns initial config

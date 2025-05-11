@@ -1,45 +1,8 @@
-import {
-  API_ENDPOINTS, DEFAULT_COMMISSION_CONFIG, CURRENCY, CACHE_SETTINGS,
-} from '../constants.js';
+import { CACHE_SETTINGS } from '../constants.js';
+import { getDefaultConfig } from './config-default.js';
 
 // Configuration cache with expiration times
 export const configCache = {};
-
-/**
- * Returns default configuration in case API is unavailable
- * @param {string} endpoint - API endpoint path
- * @returns {Object} Default configuration
- */
-const getDefaultConfig = (endpoint) => {
-  switch (endpoint) {
-    case API_ENDPOINTS.CASH_IN:
-      return {
-        percents: DEFAULT_COMMISSION_CONFIG.CASH_IN.PERCENT,
-        max: {
-          amount: DEFAULT_COMMISSION_CONFIG.CASH_IN.MAX_AMOUNT,
-          currency: CURRENCY.EUR,
-        },
-      };
-    case API_ENDPOINTS.CASH_OUT_NATURAL:
-      return {
-        percents: DEFAULT_COMMISSION_CONFIG.CASH_OUT_NATURAL.PERCENT,
-        week_limit: {
-          amount: DEFAULT_COMMISSION_CONFIG.CASH_OUT_NATURAL.WEEKLY_FREE_LIMIT,
-          currency: CURRENCY.EUR,
-        },
-      };
-    case API_ENDPOINTS.CASH_OUT_JURIDICAL:
-      return {
-        percents: DEFAULT_COMMISSION_CONFIG.CASH_OUT_JURIDICAL.PERCENT,
-        min: {
-          amount: DEFAULT_COMMISSION_CONFIG.CASH_OUT_JURIDICAL.MIN_AMOUNT,
-          currency: CURRENCY.EUR,
-        },
-      };
-    default:
-      return {};
-  }
-};
 
 /**
  * Fetches commission configuration from API with caching
