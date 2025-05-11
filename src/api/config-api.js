@@ -3,7 +3,7 @@ import {
 } from '../constants.js';
 
 // Configuration cache with expiration times
-const configCache = {};
+export const configCache = {};
 
 /**
  * Returns default configuration in case API is unavailable
