@@ -3,8 +3,28 @@ import { resetWeeklyWithdrawals } from './natural-cash-out-service.js';
 import { OPERATION_TYPES, USER_TYPES, CURRENCY } from '../constants.js';
 
 describe('Commission Service', () => {
+  let originalConsoleLog;
+  let originalConsoleError;
+  let originalConsoleWarn;
+
+  beforeAll(() => {
+    originalConsoleLog = console.log;
+    originalConsoleError = console.error;
+    originalConsoleWarn = console.warn;
+    console.log = jest.fn();
+    console.error = jest.fn();
+    console.warn = jest.fn();
+  });
+
   beforeEach(() => {
     resetWeeklyWithdrawals();
+  });
+
+  afterAll(() => {
+    // Restore original console methods
+    console.log = originalConsoleLog;
+    console.error = originalConsoleError;
+    console.warn = originalConsoleWarn;
   });
 
   test('should calculate commissions for example operations', async () => {
