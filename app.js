@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { readFileSync } from 'fs';
+import 'dotenv/config';
 import { calculateCommissions } from './src/services/commission-service.js';
 import { formatOutput } from './src/utils/output-formatter.js';
 

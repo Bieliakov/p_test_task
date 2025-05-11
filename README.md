@@ -18,6 +18,13 @@ This application calculates commission fees for cash-in and cash-out operations 
 
 - Node.js version 18.0.0 or higher (required for built-in fetch API support)
 
+## Environment Variables
+
+The application uses environment variables for configuration. These can be set in a `.env` file in the root directory.
+
+Available environment variables:
+- `API_BASE_URL` - Base URL for the commission configuration API
+
 ## Installation
 
 1. Clone the repository
@@ -71,6 +78,8 @@ npm run test:watch
 ## Project Structure
 
 - `app.js` - Entry point for the application
+- `.env` - Environment variables configuration file
+- `.env.example` - Example environment variables file for documentation
 - `src/api/` - API interactions for fetching configurations
 - `src/services/` - Business logic for commission calculations
 - `src/utils/` - Utility functions for date handling, math operations, etc.

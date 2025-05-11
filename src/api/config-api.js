@@ -41,7 +41,8 @@ const getDefaultConfig = (endpoint) => {
  */
 export const fetchConfig = async (endpoint) => {
   try {
-    const response = await fetch(`https://developers.paysera.com/tasks/api/${endpoint}`);
+    const apiBaseUrl = process.env.API_BASE_URL;
+    const response = await fetch(`${apiBaseUrl}/${endpoint}`);
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
