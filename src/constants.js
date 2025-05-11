@@ -32,3 +32,8 @@ export const USER_TYPES = {
   NATURAL: 'natural',
   JURIDICAL: 'juridical',
 };
+
+export const CACHE_SETTINGS = {
+  // Cache expiration time in milliseconds (default: 1 hour)
+  EXPIRATION: 60 * 60 * 1000,
+};

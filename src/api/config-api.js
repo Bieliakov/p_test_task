@@ -1,4 +1,9 @@
-import { API_ENDPOINTS, DEFAULT_COMMISSION_CONFIG, CURRENCY } from '../constants.js';
+import {
+  API_ENDPOINTS, DEFAULT_COMMISSION_CONFIG, CURRENCY, CACHE_SETTINGS,
+} from '../constants.js';
+
+// Configuration cache with expiration times
+const configCache = {};
 
 /**
  * Returns default configuration in case API is unavailable
@@ -37,12 +42,19 @@ const getDefaultConfig = (endpoint) => {
 };
 
 /**
- * Fetches commission configuration from API
+ * Fetches commission configuration from API with caching
  * @param {string} endpoint - API endpoint path
  * @returns {Promise<Object>} Configuration object
  */
 export const fetchConfig = async (endpoint) => {
   try {
+    // Check if we have a valid cached config
+    const cachedConfig = configCache[endpoint];
+    if (cachedConfig && Date.now() < cachedConfig.expiresAt) {
+      console.log(`Using cached config for ${endpoint}`);
+      return cachedConfig.data;
+    }
+
     const apiBaseUrl = process.env.API_BASE_URL;
     const response = await fetch(`${apiBaseUrl}/${endpoint}`);
 
@@ -50,10 +62,28 @@ export const fetchConfig = async (endpoint) => {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
     }
 
-    return await response.json();
+    const config = await response.json();
+
+    // Cache the successful response with expiration timestamp
+    configCache[endpoint] = {
+      data: config,
+      expiresAt: Date.now() + CACHE_SETTINGS.EXPIRATION,
+      timestamp: new Date().toISOString(),
+    };
+
+    return config;
   } catch (error) {
     console.error(`Error fetching config from ${endpoint}: ${error.message}`);
-    // Return default config in case API is unavailable
+
+    // Try to use expired cache before falling back to defaults
+    const cachedConfig = configCache[endpoint];
+    if (cachedConfig) {
+      console.warn(`Using expired cached config for ${endpoint} from ${cachedConfig.timestamp}`);
+      return cachedConfig.data;
+    }
+
+    // Return default config as last resort
+    console.warn(`Using default config for ${endpoint}`);
     return getDefaultConfig(endpoint);
   }
 };
